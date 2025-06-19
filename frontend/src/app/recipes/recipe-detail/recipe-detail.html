@@ -1,0 +1,38 @@
+<div class="recipe-detail-container" *ngIf="recipe">
+  <button class="back-button" [routerLink]="['/recipes']">
+    < Nazad na recepte
+  </button>
+
+  <div class="recipe-header">
+    <h2>{{ recipe.title }}</h2>
+  </div>
+
+  <div class="recipe-meta">
+    <p *ngIf="recipe.cuisine">Kuhinja: <span>{{ recipe.cuisine }}</span></p>
+    <p *ngIf="recipe.preparation_time">Vreme Pripreme: <span>{{ recipe.preparation_time }} minutes</span></p>
+    <p *ngIf="recipe.cooking_time">Vreme Kuvanja: <span>{{ recipe.cooking_time }} minutes</span></p>
+    <p *ngIf="recipe.servings">Porcije: <span>{{ recipe.servings }}</span></p>
+  </div>
+
+  <div class="recipe-section">
+    <h3>Opis</h3>
+    <p>{{ recipe.description }}</p>
+  </div>
+
+  <div class="recipe-section">
+    <h3>Sastojci</h3>
+    <pre>{{ recipe.ingredients }}</pre> </div>
+
+  <div class="recipe-section">
+    <h3>Uputstva</h3>
+    <pre>{{ recipe.instructions }}</pre> </div>
+
+  <div class="recipe-actions">
+    <button class="edit-button" (click)="editRecipe()">Izmeni recept</button>
+    <button class="delete-button" (click)="deleteRecipe()">Obriši recept</button>
+  </div>
+</div>
+
+<div *ngIf="!recipe" class="loading-message">
+  <p>Loading recipe details...</p>
+</div>

@@ -1,0 +1,65 @@
+<div class="recipe-list-container">
+  <h2>Moji Recepti</h2>
+
+  <div *ngIf="successMessage" class="alert success-message">
+    {{ successMessage }}
+  </div>
+  <div *ngIf="errorMessage" class="alert error-message">
+    {{ errorMessage }}
+  </div>
+
+  <button class="add-button" [routerLink]="['/recipes/new']">Dodaj Novi Recept</button>
+
+  <div class="filter-section">
+    <input type="text" placeholder="Pretraži (naslov, sastojci, kuhinja)..." [(ngModel)]="searchTerm"
+      (ngModelChange)="onSearchTermChange($event)" class="filter-input">
+
+    <select [(ngModel)]="cuisineFilter" (change)="applyFilters()" class="filter-select">
+      <option value="">Sve kuhinje</option>
+      <option value="Italijanska">Italijanska</option>
+      <option value="Kineska">Kineska</option>
+      <option value="Meksička">Meksička</option>
+      <option value="Grčka">Grčka</option>
+      <option value="Američka">Američka</option>
+      <option value="Japanska">Japanska</option>
+      <option value="Indijska">Indijska</option>
+      <option value="Francuska">Francuska</option>
+      <option value="Evropska">Evropska</option>
+    </select>
+
+    <input type="number" placeholder="Max priprema (min)" [(ngModel)]="maxPrepTimeFilter" (change)="applyFilters()"
+      class="filter-input">
+
+    <input type="number" placeholder="Max kuvanje (min)" [(ngModel)]="maxCookTimeFilter" (change)="applyFilters()"
+      class="filter-input">
+
+    <input type="number" placeholder="Min porcija" [(ngModel)]="minServingsFilter" (change)="applyFilters()"
+      class="filter-input">
+
+    <button (click)="resetFilters()" class="reset-button">Resetuj Filter</button>
+  </div>
+
+
+  <div *ngIf="recipes.length === 0" class="no-recipes-message">
+    <p>Nema dostupnih recepata. Pokušajte da dodate neki ili prilagodite filtere!</p>
+  </div>
+
+  <div *ngIf="recipes.length > 0" class="recipes-grid">
+    <div *ngFor="let recipe of recipes" class="recipe-card">
+      <h3>{{ recipe.title }}</h3>
+      <p><strong>Opis:</strong> {{ recipe.description }}</p>
+      <p><strong>Sastojci:</strong> {{ recipe.ingredients }}</p>
+      <p><strong>Uputstva:</strong> {{ recipe.instructions }}</p>
+      <p><strong>Vreme pripreme:</strong> {{ recipe.preparation_time }} min</p>
+      <p><strong>Vreme kuvanja:</strong> {{ recipe.cooking_time }} min</p>
+      <p><strong>Porcije:</strong> {{ recipe.servings }}</p>
+      <p><strong>Kuhinja:</strong> {{ recipe.cuisine }}</p>
+
+      <div class="card-actions">
+        <button [routerLink]="['/recipes', recipe.id]" class="view-details-button">Vidi Detalje</button>
+        <button (click)="editRecipe(recipe.id!)" class="edit-button">Uredi</button>
+        <button *ngIf="recipe.id" (click)="deleteRecipe(recipe.id!)" class="delete-button">Obriši</button>
+      </div>
+    </div>
+  </div>
+</div>

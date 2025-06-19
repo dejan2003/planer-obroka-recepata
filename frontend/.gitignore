@@ -1,0 +1,29 @@
+# Node.js / Backend
+node_modules/
+dist/
+npm-debug.log
+.env
+
+# Angular / Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/cache/
+frontend/src/assets/images/temp/
+frontend/*.js.map
+frontend/*.css.map
+frontend/coverage/
+
+# Operativni sistem
+.DS_Store
+Thumbs.db
+
+# Editori i IDE-ovi
+.vscode/
+*.sublime-project
+*.sublime-workspace
+.idea/
+
+# Logovi i privremeni fajlovi
+*.log
+*.tmp
+*.bak

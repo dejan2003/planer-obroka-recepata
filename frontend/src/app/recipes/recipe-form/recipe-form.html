@@ -1,0 +1,79 @@
+<div class="recipe-form-container">
+  <h2>{{ isEditMode ? 'Uredi Recept' : 'Dodaj Novi Recept' }}</h2>
+
+  <div *ngIf="successMessage" class="alert success-message">
+    {{ successMessage }}
+  </div>
+  <div *ngIf="errorMessage" class="alert error-message">
+    {{ errorMessage }}
+  </div>
+
+  <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()" class="recipe-form">
+    <div class="form-group">
+      <label for="title">Naziv Recepta *</label>
+      <input id="title" type="text" formControlName="title" placeholder="npr. Ukusna Pasta">
+      <div *ngIf="recipeForm.get('title')?.invalid && (recipeForm.get('title')?.touched || recipeForm.get('title')?.dirty)" class="validation-message error-message">
+        Naziv je obavezan.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Opis</label> <textarea id="description" formControlName="description" rows="3" placeholder="Kratak opis vašeg recepta..."></textarea>
+      </div>
+
+    <div class="form-group">
+      <label for="ingredients">Sastojci * (Jedan po liniji ili odvojeni zarezom)</label>
+      <textarea id="ingredients" formControlName="ingredients" rows="6" placeholder="Spisak svih sastojaka ovde..."></textarea>
+      <div *ngIf="recipeForm.get('ingredients')?.invalid && (recipeForm.get('ingredients')?.touched || recipeForm.get('ingredients')?.dirty)" class="validation-message error-message">
+        Sastojci su obavezni.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="instructions">Uputstva * (Korak po korak)</label>
+      <textarea id="instructions" formControlName="instructions" rows="8" placeholder="Navedite detaljna uputstva za kuvanje..."></textarea>
+      <div *ngIf="recipeForm.get('instructions')?.invalid && (recipeForm.get('instructions')?.touched || recipeForm.get('instructions')?.dirty)" class="validation-message error-message">
+        Uputstva su obavezna.
+      </div>
+    </div>
+
+    <div class="form-group-row"> <div class="form-group">
+        <label for="preparation_time">Vreme Pripreme (minuta):</label>
+        <input id="preparation_time" type="number" formControlName="preparation_time" placeholder="npr. 20">
+      </div>
+
+      <div class="form-group">
+        <label for="cooking_time">Vreme Kuvanja (minuta):</label>
+        <input id="cooking_time" type="number" formControlName="cooking_time" placeholder="npr. 45">
+      </div>
+    </div>
+
+    <div class="form-group-row"> <div class="form-group">
+        <label for="servings">Porcije:</label>
+        <input id="servings" type="number" formControlName="servings" placeholder="npr. 4">
+      </div>
+
+      <div class="form-group">
+        <label for="cuisine">Kuhinja:</label>
+        <select id="cuisine" formControlName="cuisine">
+          <option value="">Odaberi kuhinju</option>
+          <option value="Italijanska">Italijanska</option>
+          <option value="Kineska">Kineska</option>
+          <option value="Meksička">Meksička</option>
+          <option value="Grčka">Grčka</option>
+          <option value="Američka">Američka</option>
+          <option value="Japanska">Japanska</option>
+          <option value="Indijska">Indijska</option>
+          <option value="Francuska">Francuska</option>
+          <option value="Evropska">Evropska</option>
+          </select>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="cancel-button" (click)="goBack()">Odustani</button>
+      <button type="submit" [disabled]="recipeForm.invalid" class="save-button"> {{ isEditMode ? 'Ažuriraj Recept' : 'Dodaj Recept' }}
+      </button>
+    </div>
+  </form>
+</div>

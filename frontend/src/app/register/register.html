@@ -1,0 +1,17 @@
+<div class="auth-page-container">
+  <div class="auth-container">
+    <h2>Registracija</h2>
+    <form (ngSubmit)="onRegister()">
+      <div class="form-group">
+        <label for="register-email">Email:</label>
+        <input type="email" id="register-email" name="email" [(ngModel)]="email" required>
+      </div>
+      <div class="form-group">
+        <label for="register-password">Lozinka:</label>
+        <input type="password" id="register-password" name="password" [(ngModel)]="password" required>
+      </div>
+      <button type="submit">Registruj se</button>
+    </form>
+    <p>Već imate nalog? <a routerLink="/login">Prijavite se ovde</a></p>
+    </div>
+</div>
